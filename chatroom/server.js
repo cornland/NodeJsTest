@@ -3,6 +3,8 @@ var fs = require('fs');
 var path = require('path');
 var mime = require('mime');
 var cache = {};
+var chatServer = require('./lib/chat_server');
+chatServer.listen(server);
 
 function send404(response){
     response.writeHead(404, {'Content-Type': 'text/plain'});
@@ -15,7 +17,7 @@ function sendFile(response, filePath, fileContents) {
         200,
         {"Content-Type": mime.lookup(path.basename(filePath))}
     );
-    respose.end(fileContents);
+    response.end(fileContents);
 }
 
 function serveStatic(response, cache, absPath){
